@@ -73,8 +73,6 @@ server <- function(input, output, session) {
 
     
     output$Plot <- renderPlot({
-        validate(
-            need(input$H1_weight+input$H2_weight+input$H3_weight+input$H4_weight == 1, "Hypothesis weights need to add up to 1"))
         #Plot here
         print(ggplot(data=df_test_comb(), aes(x=fish_weight, y=comp_score, color=alt)) +
             geom_line() +  geom_vline(xintercept = input$fish_weight, linetype="dotted", color = "red", size=1) +
