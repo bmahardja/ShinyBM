@@ -31,12 +31,7 @@ ui <- fluidPage(
                         "Weight for Delta Smelt objective (the rest will be allocated towards Water Cost objective):",
                         min = 0.01,
                         max = 0.99,
-                        value = 0.50),
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+                        value = 0.50)
         ),
 
         # Show a plot of the generated distribution
