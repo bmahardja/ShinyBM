@@ -68,14 +68,16 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(tabsetPanel(tabPanel("Line Plot",plotOutput("Plot")),tabPanel("Utility Score Table",tableOutput("tableSum")),tabPanel("VOI",textOutput("VOI_calc1"),textOutput("VOI_calc2")),
+                              
                               tabPanel("Swing Weighting", h3("Instructions"),
                                        p("See hypothethical alternatives below. Choose your preferred scenario.This will be your rank 1 scenario. Assign a score of 100 to your rank 1 scenario in the box below. How important is the swing from worst to best level of rank 2 scenario compared with the swing from worst to best on the rank 1 scenario? Assign a value between 0 and 100 that reflects the relative value of the rank 2 scenario."),
                                        tableOutput("tableSwing"),
                                        numericInput("numInputAlt_A","Enter a score between 0 and 100 for Alternative A",value=100, min=0, max=100),
                                        numericInput("numInputAlt_B","Enter a score between 0 and 100 for Alternative B",value=100, min=0, max=100),actionButton("submit","Submit"),
-                                       h4("Your calculated objective scores based on swing weighting:"),
+                                       h4("Your calculated objective weights based on swing weighting:"),
                                        textOutput("swingText_Water"),
-                                       textOutput("swingText_DeltaSmelt"))))
+                                       textOutput("swingText_DeltaSmelt")),
+                              tabPanel("Raw Consequence Table",tableOutput("tableRaw"))))
     )
 )
 
@@ -163,12 +165,13 @@ server <- function(input, output, session) {
     })
     # Show warning if the hypothesis weight number exceeds 1
     output$warning <- renderUI({
-      if (input$H1_weight+input$H2_weight+input$H3_weight+input$H4_weight > 1) {
-        tags$div(style = "color: red;", "Warning: The total hypothesis weight exceeds 1!")
+      if (input$H1_weight+input$H2_weight+input$H3_weight+input$H4_weight != 1) {
+        tags$div(style = "color: red;", "Warning: The total hypothesis weights do not add up to 1!")
       }
     })
     
     # Raw consequence table
+    output$tableRaw <- renderTable(consequence_table)
 }
 
 # Run the application 
