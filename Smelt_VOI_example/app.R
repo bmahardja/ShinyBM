@@ -9,6 +9,7 @@
 
 library(shiny)
 library(tidyverse)
+library(rsconnect)
 
 # Load data
 consequence_table <-read.csv("ConsequenceTable_2024-08-21.csv")
