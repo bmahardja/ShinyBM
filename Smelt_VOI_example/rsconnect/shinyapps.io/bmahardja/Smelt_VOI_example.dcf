@@ -5,7 +5,7 @@ account: bmahardja
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12620120
-bundleId: 9067098
+bundleId: 9067414
 url: https://bmahardja.shinyapps.io/Smelt_VOI_example/
 version: 1
 asMultiple: FALSE
