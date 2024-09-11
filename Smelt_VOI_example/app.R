@@ -32,7 +32,7 @@ swing_table <- data.frame(Objective = c("Water Cost (in TAF)","Delta Smelt popul
                         stringsAsFactors = FALSE)
 
 # Grab data for the water cost plot
-data_plot_water <- cons_table %>% filter(Objective=="WaterCost"&Hypothesis=="H1") %>%
+data_plot_water <- consequence_table %>% filter(Objective=="WaterCost"&Hypothesis=="H1") %>%
   select(-Hypothesis)
 # Convert the 'Category' column to a factor with a specific order
 data_plot_water$Alternatives <- factor(data_plot_water$Alternatives, levels = c("Alt F80", "Alt F74", "Alt S74",
