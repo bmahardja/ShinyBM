@@ -12,7 +12,7 @@ library(tidyverse)
 library(rsconnect)
 
 # Load data
-consequence_table <-read.csv("ConsequenceTable_2024-09-10.csv")
+consequence_table <-read.csv("ConsequenceTable_2024-09-25.csv")
 # Standardize score based on local scale
 dsm <- consequence_table %>% filter(Objective=="DeltaSmelt") %>%
   mutate(std_score=(Score-min(Score))/(max(Score)-min(Score)))
@@ -68,8 +68,8 @@ ui <- fluidPage(
             numericInput("H8_weight", "Hypothesis 8 Weight", 0.0375, min = 0.0, max = 0.99),
             sliderInput("fish_weight",
                         "Weight for Delta Smelt objective (the rest will be allocated towards Water Cost objective):",
-                        min = 0.01,
-                        max = 0.99,
+                        min = 0.00,
+                        max = 1.00,
                         value = 0.50),
             h3("Hypothesis Information"),
             p("Hypothesis 1: IBMR v1 with Delta Smelt distribution and food/zooplankton submodels"),
@@ -98,9 +98,9 @@ ui <- fluidPage(
                                        p("The two fundamental objectives are to 1) maximize population growth rate for Delta Smelt and 2) minimize water supply cost."),
                                        h3("Models/Hypotheses"),
                                        h4("CalSim3"),
-                                       p("To calculate water cost for each alternative, CalSim3 model was used. CalSim3 is a water resources planning model that simulate operations of the SWP and CVP and much of the water resources infrastructure in the Central Valley of California and the Sacramento-San Joaquin Delta region. Bioenergetic parameters came from Rose et al. (2013) publication, which used information from Rainbow Smelt with an assumed temperature effect for Delta Smelt."),
+                                       p("To calculate water cost for each alternative, CalSim3 model was used. CalSim3 is a water resources planning model that simulate operations of the SWP and CVP and much of the water resources infrastructure in the Central Valley of California and the Sacramento-San Joaquin Delta region."),
                                        h4("IBMR v1"),
-                                       p("To evaluate population growth under the alternatives and hypotheses, Delta Smelt Individual-Based Model in R (IBMR) was used. IBMR v1 is a monthly time-step simulation/agent-based model for Delta Smelt with an explicit bioenergetics component calibrated to observed conditions in 1995-2014."),
+                                       p("To evaluate population growth under the alternatives and hypotheses, Delta Smelt Individual-Based Model in R (IBMR) was used. IBMR v1 is a monthly time-step simulation/agent-based model for Delta Smelt with an explicit bioenergetics component calibrated to observed conditions in 1995-2014. Bioenergetic parameters came from Rose et al. (2013) publication, which used information from Rainbow Smelt with an assumed temperature effect for Delta Smelt."),
                                        h4("IBMR v2"),
                                        p("IBMR v2 uses mostly the same parameters as v1, but some bioenergetic parameters were 'fitted' to more recent Delta Smelt data per Smith and Nobriga (2023) and daily timestep was used instead of monthly."),
                                        h4("Zooplankton submodel"),
