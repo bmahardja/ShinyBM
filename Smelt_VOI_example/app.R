@@ -228,7 +228,7 @@ server <- function(input, output, session) {
     })
     # Show warning if the hypothesis weight number exceeds 1
     output$warning <- renderUI({
-      if (input$H1_weight+input$H2_weight+input$H3_weight+input$H4_weight+input$H5_weight+input$H6_weight+input$H7_weight+input$H8_weight != 1) {
+      if (!all.equal(1,input$H1_weight+input$H2_weight+input$H3_weight+input$H4_weight+input$H5_weight+input$H6_weight+input$H7_weight+input$H8_weight)) {
         tags$div(style = "color: red;", "Warning: The total hypothesis weights do not add up to 1!")
       }
     })
